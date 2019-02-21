@@ -1,0 +1,22 @@
+{
+    "name": "overnic/aliyun-market-api-sdk",
+    "description": "aliyun market api sdk",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "overnick",
+            "email": "overnic@httpd.cc"
+        }
+    ],
+    "require": {
+        "overnic/support": "^1.1",
+        "guzzlehttp/guzzle": "^6.3",
+        "pimple/pimple": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "OverNick\\Aliyun\\Market\\": "src/"
+        }
+    }
+}
