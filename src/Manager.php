@@ -21,8 +21,9 @@ class Manager extends ServiceContainer
      * 接口请求
      *
      * @param $url
-     * @param string $method
      * @param array $options
+     * @param string $method
+     * @return mixed|\Psr\Http\Message\ResponseInterface
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function request($url, $options = [], $method = 'POST')
@@ -42,7 +43,7 @@ class Manager extends ServiceContainer
             $options['headers']['Authorization'] = "APPCODE " . $this->config->get('appcode');
         }
 
-        $this->client->request($method, $url, $options);
+        return $this->client->request($method, $url, $options);
     }
 
     /**
@@ -50,6 +51,7 @@ class Manager extends ServiceContainer
      * @param $name
      * @param $arguments
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return mixed|\Psr\Http\Message\ResponseInterface
      */
     public function __call($name, $arguments)
     {
@@ -64,11 +66,13 @@ class Manager extends ServiceContainer
         // 接口地址
         $url = $this->config->get('api.' . $name);
 
+        $options = [];
+
         if(count($arguments) == 1){
-            list($options) = $arguments;
+            list($options['form_params']) = $arguments;
             $method = 'POST';
         }else{
-            list($options, $method) = $arguments;
+            list($options['query'], $method) = $arguments;
         }
 
         return $this->request($url, $options, $method);

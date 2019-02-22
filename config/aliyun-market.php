@@ -16,7 +16,10 @@ return [
      * 云市场api中获取的AppCode
      */
     'appcode' => '',
-
+    /**
+     * 是否自动实例化GuzzleHttp组件
+     */
+    'client' => true,
     /**
      * api集合，配置内容
      * 调用名称 -> api地址
